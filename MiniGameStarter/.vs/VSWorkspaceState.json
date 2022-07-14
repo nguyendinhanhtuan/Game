@@ -1,0 +1,13 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\MiniGameStarter",
+    "\\MiniGameStarter\\TrainingFramework",
+    "\\MiniGameStarter\\TrainingFramework\\src",
+    "\\MiniGameStarter\\TrainingFramework\\src\\GameManager",
+    "\\MiniGameStarter\\TrainingFramework\\src\\GameObject",
+    "\\MiniGameStarter\\TrainingFramework\\src\\GameStates"
+  ],
+  "SelectedNode": "\\MiniGameStarter\\TrainingFramework.sln",
+  "PreviewInSolutionExplorer": false
+}
