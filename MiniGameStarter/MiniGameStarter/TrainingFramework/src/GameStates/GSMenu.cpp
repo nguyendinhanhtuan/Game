@@ -46,7 +46,7 @@ void GSMenu::Init()
 	// game title
 	shader = ResourceManagers::GetInstance()->GetShader("TextShader");
 	std::shared_ptr<Font> font = ResourceManagers::GetInstance()->GetFont("arialbd.ttf");
-	m_textGameName = std::make_shared< Text>(shader, font, "CANNON GAME", Vector4(1.0f, 0.5f, 0.0f, 1.0f), 3.0f);
+	m_textGameName = std::make_shared< Text>(shader, font, " ", Vector4(1.0f, 0.5f, 0.0f, 1.0f), 3.0f);
 	m_textGameName->Set2DPosition(Vector2(350, 250));
 
 	std::string name = "Alarm01.wav";

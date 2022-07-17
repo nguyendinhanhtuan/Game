@@ -32,9 +32,9 @@
   raster.c
   sfnt.c
   truetype.c
-  type1cid.c
   type1.c
+  type1cid.c
   type42.c
   winfnt.c
   ftdebug.c
-  freetype.vcxproj -> D:\MiniGameStarter\MiniGameStarter\freetype\objs\vc2019\Win32\freetype.lib
+  freetype.vcxproj -> D:\Game\MiniGameStarter\MiniGameStarter\freetype\objs\vc2019\Win32\freetype.lib

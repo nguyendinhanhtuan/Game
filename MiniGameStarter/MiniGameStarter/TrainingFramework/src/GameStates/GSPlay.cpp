@@ -4,12 +4,16 @@
 #include "Texture.h"
 #include "Model.h"
 #include "Camera.h"
+#include "ActorACC.h"
+#include "Slime.h"
 #include "Font.h"
 #include "Sprite2D.h"
 #include "Sprite3D.h"
 #include "Text.h"
 #include "GameButton.h"
 #include "SpriteAnimation.h"
+
+
 
 
 
@@ -44,75 +48,37 @@ void GSPlay::Init()
 		});
 	m_listButton.push_back(button);
 
-	// score
+	// time
 	shader = ResourceManagers::GetInstance()->GetShader("TextShader");
 	std::shared_ptr<Font> font = ResourceManagers::GetInstance()->GetFont("arialbd.ttf");
-	m_score = std::make_shared< Text>(shader, font, "Score: 0", TextColor::YELLOW, 2.0);
-	m_score->Set2DPosition(Vector2(5, 38));
-	//Player
-	shader = ResourceManagers::GetInstance()->GetShader("Animation");
-	texture = ResourceManagers::GetInstance()->GetTexture("Actor1_2.tga");
-	std::shared_ptr<SpriteAnimation> obj = std::make_shared<SpriteAnimation>(model, shader, texture, 9, 6, 3, 0.1f);
-	obj->Set2DPosition(240, 400);
-	obj->SetSize(30, 40);
-	m_listAnimation.push_back(obj);
+	m_time = std::make_shared< Text>(shader, font, "60", TextColor::BLACK, 2.0);
+	m_time->Set2DPosition(Vector2(208, 132));
+	m_listTime.push_back(m_time);
+
+
+	// Actor ATT 
+	model = ResourceManagers::GetInstance()->GetModel("Sprite2D.nfg");
+	texture = ResourceManagers::GetInstance()->GetTexture("ActorATT.tga");
+	shader = ResourceManagers::GetInstance()->GetShader("TextureShader");
+	m_ATT = std::make_shared<Sprite2D>(model, shader, texture);
+	m_ATT -> SetSize(200, 150);
+	m_ATT -> Set2DPosition(110, 600);
+
+
+
+	/**/
+	std::shared_ptr<Slime> Obj = std::make_shared<Slime>(1220, 350);
+	pointerSlime = Obj;
+	m_listSlimeAnimation.push_back(Obj);
 	m_KeyPress = 0;
-	// ShipATT
-	model = ResourceManagers::GetInstance()->GetModel("Sprite2D.nfg");
-	shader = ResourceManagers::GetInstance()->GetShader("TextureShader");
-	texture = ResourceManagers::GetInstance()->GetTexture("Abc.tga");
-	m_Ship = std::make_shared<Sprite2D>(model, shader, texture);
-	m_Ship ->Set2DPosition( 1150,130 );
-	m_Ship ->SetSize(130, 130);
 
-	model = ResourceManagers::GetInstance()->GetModel("Sprite2D.nfg");
-	shader = ResourceManagers::GetInstance()->GetShader("TextureShader");
-	texture = ResourceManagers::GetInstance()->GetTexture("Abc.tga");
-	m_Ship1 = std::make_shared<Sprite2D>(model, shader, texture);
-	m_Ship1->Set2DPosition(1150, 290);
-	m_Ship1->SetSize(130, 130);
+	/**/
+	std::shared_ptr<ActorACC> Bbj = std::make_shared<ActorACC>(110, 320);
 
-	model = ResourceManagers::GetInstance()->GetModel("Sprite2D.nfg");
-	shader = ResourceManagers::GetInstance()->GetShader("TextureShader");
-	texture = ResourceManagers::GetInstance()->GetTexture("Abc.tga");
-	m_Ship2 = std::make_shared<Sprite2D>(model, shader, texture);
-	m_Ship2->Set2DPosition(1150, 460);
-	m_Ship2->SetSize(130, 130);
+	pointerActorACC = Bbj;
+	m_listActorACCAnimation.push_back(Bbj);
+	m_KeyPress = 0;
 
-	model = ResourceManagers::GetInstance()->GetModel("Sprite2D.nfg");
-	shader = ResourceManagers::GetInstance()->GetShader("TextureShader");
-	texture = ResourceManagers::GetInstance()->GetTexture("Abc.tga");
-	m_Ship3 = std::make_shared<Sprite2D>(model, shader, texture);
-	m_Ship3->Set2DPosition(1150, 630);
-	m_Ship3->SetSize(130, 130);
-
-	model = ResourceManagers::GetInstance()->GetModel("Sprite2D.nfg");
-	shader = ResourceManagers::GetInstance()->GetShader("TextureShader");
-	texture = ResourceManagers::GetInstance()->GetTexture("Abc1.tga");
-	m_Ship4 = std::make_shared<Sprite2D>(model, shader, texture);
-	m_Ship4->Set2DPosition(130, 130);
-	m_Ship4->SetSize(130, 130);
-	
-	model = ResourceManagers::GetInstance()->GetModel("Sprite2D.nfg");
-	shader = ResourceManagers::GetInstance()->GetShader("TextureShader");
-	texture = ResourceManagers::GetInstance()->GetTexture("Abc1.tga");
-	m_Ship5 = std::make_shared<Sprite2D>(model, shader, texture);
-	m_Ship5->Set2DPosition(130, 290);
-	m_Ship5->SetSize(130, 130);
-
-	model = ResourceManagers::GetInstance()->GetModel("Sprite2D.nfg");
-	shader = ResourceManagers::GetInstance()->GetShader("TextureShader");
-	texture = ResourceManagers::GetInstance()->GetTexture("Abc1.tga");
-	m_Ship6 = std::make_shared<Sprite2D>(model, shader, texture);
-	m_Ship6->Set2DPosition(130, 460);
-	m_Ship6->SetSize(130, 130);
-
-	model = ResourceManagers::GetInstance()->GetModel("Sprite2D.nfg");
-	shader = ResourceManagers::GetInstance()->GetShader("TextureShader");
-	texture = ResourceManagers::GetInstance()->GetTexture("Abc1.tga");
-	m_Ship7 = std::make_shared<Sprite2D>(model, shader, texture);
-	m_Ship7->Set2DPosition(130, 630);
-	m_Ship7->SetSize(130, 130);
 }
 
 void GSPlay::Exit()
@@ -193,42 +159,133 @@ void GSPlay::HandleMouseMoveEvents(int x, int y)
 	
 }
 
+void GSPlay::TimeACC(GLfloat deltaTime)
+{
+	m_ACCTime += deltaTime;
+	if (m_ACCTime <= 10.0f)
+	{
+		m_ACCTime++;
+		aTime = true;
+	}
+	else
+	{
+		if (10.0f < m_ACCTime < 10.6f)
+		{
+			aTime = false;
+			m_ACCTime++;
+		}
+		else
+		{
+			m_ACCTime = 0;
+		}
+	}
+}
+
+
 void GSPlay::Update(float deltaTime)
 {
-	switch (m_KeyPress)//Handle Key event
+	/*
+	for (int i = 60; i > 0; i--)
 	{
-	default:
+	std::string s = std::to_string(i);
+	m_time -> SetText(s);
+	m_listTime.push_back(m_time);
+	}
+	*/
+	for (auto it : m_listTime)
+	{
+		it->Update(deltaTime);
+	}
+
+
+	for (auto it : m_listActorACCAnimation)
+	{
+		it->UpdateActorACCPos( deltaTime );
+	}
+		/*
+		m_ACCTime += deltaTime;
+		if (m_ACCTime <= 10.0f  ) 
+		{
+			pointerActorACC->Move(0);
+			m_ACCTime++;
+		}
+		else
+		{
+			if (10.0f < m_ACCTime < 10.6f)
+			{	
+				pointerActorACC->Move(1);
+			}
+			else 
+			{
+				m_ACCTime = 0;
+			}
+		}	
+		*/
+		switch (aTime)
+		{
+		case true:
+			pointerActorACC->Move(0);
+			break;
+		case false:
+			pointerActorACC->Move(1);
+			break;
+		default:
 		break;
 	}
+	for (auto it : m_listSlimeAnimation)
+	{
+		it->UpdateSlimePos(deltaTime);
+	}
+		switch (m_KeyPress)//Handle Key event
+		{
+		case 0:
+			pointerSlime->Move(0);
+			break;
+		case 1:
+			pointerSlime->Move(1);
+			break;
+		case 4:
+			pointerSlime->Move(2);
+			break;
+		default:
+			break;
+		}
+
 	for (auto it : m_listButton)
 	{
 		it->Update(deltaTime);
 	}
-	for (auto it : m_listAnimation)
+	for (auto it : m_listSlimeAnimation)
 	{
-		it->Update(deltaTime);
+		it->SlimeUpdate(deltaTime);
+	}
+	for (auto it : m_listActorACCAnimation)
+	{
+		it->ActorACCUpdate(deltaTime);
 	}
 }
 
 void GSPlay::Draw()
 {
 	m_background->Draw();
-	m_score->Draw();
-	m_Ship->Draw(); 
-	m_Ship1->Draw();
-	m_Ship2->Draw();
-	m_Ship3->Draw();
-	m_Ship4->Draw();
-	m_Ship5->Draw();
-	m_Ship6->Draw();
-	m_Ship7->Draw();
-	for (auto it : m_listButton)
+
+	m_ATT->Draw();
+	
+	for (auto& it : m_listTime)
+	{
+		it->Draw();
+	}
+	for (auto& it : m_listButton)
 	{
 		it->Draw();
 	}
 
-	for (auto it : m_listAnimation)
+	for (auto& it : m_listSlimeAnimation )
 	{
-		it->Draw();
+		it->SlimeDraw();
+	}
+	for (auto& it : m_listActorACCAnimation)
+	{
+		it->ActorACCDraw();
 	}
 }
