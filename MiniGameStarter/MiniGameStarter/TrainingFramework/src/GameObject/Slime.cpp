@@ -20,31 +20,24 @@ Slime::~Slime()
 {
 }
 
+void Slime::Dead(int die ) 
+{
+	switch (die)
+	{
+	case 0:
+		std::printf("tttttt");
 
+	case 1:
+
+		std::printf("ffffffffff");
+
+	default:
+		break;
+	}
+
+}
 
 void Slime::Move(int dir) {
-	/*
-	if (dir) {
-		//move left
-		
-		X_Val = - 1.0f ;
-		posX += X_Val;
-		if (posX < 100 || posX + 10 > 1280 ) posX -= X_Val;
-		if (isFaceRight) {
-			isFaceRight = false;
-			SlimeSprite->SetRotation(Vector3(0, 0, 0));
-		}
-	}
-	else {
-		//move right
-		X_Val = 1.0f;
-		posX += X_Val;
-		if (posX < 100 || posX + 10 > 1280) posX -= X_Val;
-		if (!isFaceRight) {
-			isFaceRight = true;
-			SlimeSprite->SetRotation(Vector3(0, PI, 0));
-		}
-	}*/
 
 	switch (dir)
 	{
@@ -63,7 +56,7 @@ void Slime::Move(int dir) {
 			SlimeSprite->SetRotation(Vector3(0, 0, 0));
 		}
 		break;
-	case 2 :
+	case 4:
 		//move right
 		SlimeSprite->SetCurrentAction(1);
 		X_Val = 0.5f;
@@ -79,20 +72,18 @@ void Slime::Move(int dir) {
 	}
 }
 
-void Slime::onDead()
-{
-}
-
 
 void Slime::UpdateSlimePos(GLfloat deltaTime)
 {
 	SlimeSprite->Set2DPosition(posX, posY);
+
 }
 
 void Slime::SlimeUpdate(GLfloat deltaTime)
 {
-	SlimeSprite->Update(deltaTime);
-
+	
+		SlimeSprite->Update(deltaTime);
+	
 }
 void Slime::SlimeDraw()
 {

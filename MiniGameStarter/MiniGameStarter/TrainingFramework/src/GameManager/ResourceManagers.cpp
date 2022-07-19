@@ -100,6 +100,10 @@ void ResourceManagers::RemoveFont(const std::string& name)
 {
 	m_MapFont.erase(name);
 }
+void ResourceManagers::RemoveGameButton(const std::string& name)
+{
+	m_MapGameButton.erase(name);
+}
 
 std::shared_ptr<Shader> ResourceManagers::GetShader(const std::string& name)
 {

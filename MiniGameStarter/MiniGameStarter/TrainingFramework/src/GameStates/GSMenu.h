@@ -8,7 +8,7 @@ class GSMenu :
 public:
 	GSMenu();
 	~GSMenu();
-
+	std::string name = "Alarm02.wav";
 	void	Init() override;
 	void	Exit() override;
 

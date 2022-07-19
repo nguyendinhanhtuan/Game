@@ -30,6 +30,7 @@ void GSMenu::Init()
 	button->SetSize(350, 350);
 	button->SetOnClick([]() {
 			GameStateMachine::GetInstance()->ChangeState(StateType::STATE_PLAY);
+			
 		});
 	m_listButton.push_back(button);
 
@@ -49,7 +50,6 @@ void GSMenu::Init()
 	m_textGameName = std::make_shared< Text>(shader, font, " ", Vector4(1.0f, 0.5f, 0.0f, 1.0f), 3.0f);
 	m_textGameName->Set2DPosition(Vector2(350, 250));
 
-	std::string name = "Alarm01.wav";
 	ResourceManagers::GetInstance()->PlaySound(name);
 }
 
@@ -82,6 +82,7 @@ void GSMenu::HandleTouchEvents(int x, int y, bool bIsPressed)
 	{
 		if (button->HandleTouchEvents(x, y, bIsPressed))
 		{
+			ResourceManagers::GetInstance()->StopSound(name);
 			break;
 		}
 	}

@@ -6,7 +6,7 @@ class GSIntro : public GameStateBase
 public:
 	GSIntro();
 	~GSIntro();
-
+	std::string name = "Searching.wav";
 	void	Init() override;
 	void	Exit() override;
 

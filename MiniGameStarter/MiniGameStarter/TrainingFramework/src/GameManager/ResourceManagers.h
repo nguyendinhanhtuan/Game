@@ -10,6 +10,7 @@
 #include "GameObject/Sprite2D.h"
 #include "GameObject/Sprite3D.h"
 #include "GameObject/Text.h"
+#include "GameObject/GameButton.h"
 #include "soloud.h"
 #include "soloud_wav.h"
 
@@ -29,6 +30,7 @@ public:
 	void RemoveSound(const std::string& name) {};
 	void RemoveTexture(const std::string& name);
 	void RemoveFont(const std::string& name);
+	void RemoveGameButton(const std::string& name);
 
 	std::shared_ptr<Shader> GetShader(const std::string& name);
 	std::shared_ptr<Texture> GetTexture(const std::string& name);
@@ -44,6 +46,7 @@ private:
 	std::map<std::string, std::shared_ptr<Texture>> m_MapTexture;
 	std::map<std::string, std::shared_ptr<Model>> m_MapModels;
 	std::map<std::string, std::shared_ptr<Font>> m_MapFont;
+	std::map<std::string, std::shared_ptr<GameButton>> m_MapGameButton;
 
 	std::string m_ShaderPath;
 	std::string m_TexturePath;

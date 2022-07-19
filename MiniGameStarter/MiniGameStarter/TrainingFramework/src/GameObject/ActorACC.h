@@ -11,6 +11,9 @@ public:
 	GLfloat posY = 0.0f;
 	GLfloat X_Val = 0.0f;
 	GLfloat Y_Val = 0.0f;
+
+	int state;
+	float timer;
 	//stat
 	int team;	// ID of which team this Slime belongs to
 	bool isPlayable;
@@ -29,4 +32,5 @@ public:
 private:
 	std::shared_ptr <SpriteAnimation> ActorACCSprite;
 };
+
 

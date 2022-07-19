@@ -24,6 +24,7 @@ public:
 	void		Set2DPosition(GLint x, GLint y);
 	void		SetRotation(Vector3 rotation);
 	void		SetCurrentAction(GLint curAc);
+	void		SetFrameTime(GLfloat frTime);
 	Vector2		Get2DPosition();
 	void		SetSize(GLint width, GLint height);
 };

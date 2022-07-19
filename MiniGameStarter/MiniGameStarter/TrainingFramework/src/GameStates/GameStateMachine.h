@@ -22,6 +22,7 @@ public:
 	void	Cleanup();
 
 	void	ChangeState(std::shared_ptr<GameStateBase> state);
+	void	ChangeState1(StateType state);
 	void	ChangeState(StateType stt);
 	void	PushState(StateType stt);
 	void	PopState();
@@ -29,6 +30,7 @@ public:
 	bool	isRunning() { return m_running; }
 	void	Quit() { m_running = false; }
 	void	PerformStateChange();
+	void	PerformStateChange1();
 
 	inline std::shared_ptr<GameStateBase> CurrentState()const
 	{

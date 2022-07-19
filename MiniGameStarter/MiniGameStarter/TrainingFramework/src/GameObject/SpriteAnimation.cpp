@@ -146,3 +146,6 @@ void SpriteAnimation::SetSize(GLint width, GLint height)
 void SpriteAnimation::SetCurrentAction (GLint curAc) {
 	m_currentAction = curAc;
 }
+void SpriteAnimation::SetFrameTime(GLfloat frTime) {
+	m_frameTime = frTime;
+}

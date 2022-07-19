@@ -1,10 +1,9 @@
 #include "SpriteAnimation.h"
 #include "ResourceManagers.h"
-
 class SpriteAnimation;
 
-class Slime 
-	
+class Slime
+
 {
 public:
 	bool stable = true;
@@ -12,6 +11,7 @@ public:
 	GLfloat posY = 0.0f;
 	GLfloat X_Val = 0.0f;
 	GLfloat Y_Val = 0.0f;
+
 
 	//stat
 	int team;	// ID of which team this Slime belongs to
@@ -22,7 +22,7 @@ public:
 	~Slime();
 	//function
 	void Move(int dir);
-	void onDead();
+	void Dead(int die);
 	// caculate function
 	void UpdateSlimePos(GLfloat deltaTime);
 	// sprite function
@@ -31,4 +31,3 @@ public:
 private:
 	std::shared_ptr <SpriteAnimation> SlimeSprite;
 };
-

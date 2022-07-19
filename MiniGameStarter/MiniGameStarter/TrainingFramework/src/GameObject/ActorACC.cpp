@@ -8,12 +8,14 @@ ActorACC::ActorACC(float x, float y)
 	auto model = ResourceManagers::GetInstance()->GetModel("Sprite2D.nfg");
 	auto shader = ResourceManagers::GetInstance()->GetShader("Animation");
 	auto texture = ResourceManagers::GetInstance()->GetTexture("ActorACC.tga");
-	ActorACCSprite = std::make_shared<SpriteAnimation>(model, shader, texture, 5, 2, 0, 0.1f);
+	ActorACCSprite = std::make_shared<SpriteAnimation>(model, shader, texture, 5, 2, 0, 0.3f);
 	ActorACCSprite->SetSize(200, 600);
 	ActorACCSprite->Set2DPosition(posX, posY);
 	isPlayable = true;
 
 	isFaceRight = true;
+	state = 0;
+	timer = 1.0f;
 }
 
 ActorACC::~ActorACC()
@@ -24,19 +26,31 @@ ActorACC::~ActorACC()
 
 void ActorACC::Move(int dir)
 {
-
+	
 	switch (dir)
 	{
 	case 0:
-		ActorACCSprite->SetCurrentAction(0);
-		ActorACCSprite->Set2DPosition(posX, 440);
-		break;
+		if (state != 0) {
+			//std::printf("dung yen");
+			timer = 1.0f;
+			ActorACCSprite->SetCurrentAction(0);
+		}
+			state = 0;
+			break;
 	case 1:
-		ActorACCSprite->SetCurrentAction(1);
-		break;
+		if (state != 1)
+		{
+			//std::printf("quay dau");
+			timer = 1.0f;
+			ActorACCSprite->SetCurrentAction(1);
+		}
+			ActorACCSprite->Set2DPosition(posX, 330);
+			state = 1;
+			break;
 	default:
 		break;
 	}
+	
 }
 
 void ActorACC::onDead()
@@ -51,10 +65,12 @@ void ActorACC::ActorACCDraw()
 void ActorACC::UpdateActorACCPos(GLfloat deltaTime)
 {
 	ActorACCSprite->Set2DPosition(posX, posY);
+	if (state == 1) timer -= deltaTime;
 }
 
 void ActorACC::ActorACCUpdate(GLfloat deltaTime)
 {
-	ActorACCSprite->Update(deltaTime);
-
+	if (timer > 0.0f) {
+		ActorACCSprite->Update(deltaTime);
+	}
 }
